@@ -426,5 +426,5 @@ installer/rules.sql       the shared rule blocks
 installer/render.py       renders both for one schema name
 routines/STUB.md          the routine stub and the by-hand steps
 companies/example/seed.sql a template company
-console/                  the owner's console (Next.js)
+console/SPEC.md           the owner's console, specified — yours to build
 ```
