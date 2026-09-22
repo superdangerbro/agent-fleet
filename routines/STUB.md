@@ -17,7 +17,10 @@ Nothing else is configured here on purpose: prompts, rules and schedules are cha
 
 ## Creating a seat's routine (once per seat, by hand — there is no API for this)
 
-1. Routines → New routine. Repository: the company repo. Model: whatever the
+1. Routines → New routine. **Name it `<Company> · <seat name>`** (e.g.
+   `Acme · Sales manager`): the routines sidebar at claude.ai is one flat
+   list across every company with no folder or filter, so the prefix is the
+   only grouping you get. Repository: the company repo. Model: whatever the
    seat's `agents.model` says (Sonnet for most seats; Opus for the General
    Manager and the Database Auditor is a reasonable default).
 2. Instructions: the stub above with the slug filled in.
