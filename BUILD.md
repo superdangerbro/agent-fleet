@@ -49,7 +49,7 @@ Three pieces, three places:
 |---|---|---|
 | Ledger (schema, queue, prompts, schedules) | the company's Supabase project | `installer/render.py --schema <name>` |
 | Seats (routines) | claude.ai → Code → Routines, on the company repo | one routine per seat, the stub from `routines/STUB.md` |
-| Console (agents, prompts, rules, schedules, board, pause, ask the GM) | `console/`, one deployment for all companies | one entry in the registry (`FLEET_COMPANIES` or a local `companies.json`) |
+| Console (agents, prompts, rules, schedules, board, pause, ask the GM) | yours to build from `console/SPEC.md`, one deployment for all companies | one entry in its registry |
 
 Plus the company repository itself, which needs four things (§3).
 
@@ -252,63 +252,18 @@ rules and the two must agree):
 
 ---
 
-## 5. Run the console
+## 5. Build and run the console
 
-```bash
-cd console
-cp .env.example .env.local        # SUPABASE_ACCESS_TOKEN=sbp_…, CONSOLE_KEY=<anything>
-npm install
-npm run build && npm run start -- -p 3111
-```
+The console is the one piece this public copy does not ship as code. It is
+specified screen by screen in `console/SPEC.md`; every screen is a single
+query against the `wall_*` views plus a handful of writes, so an agent builds
+it in an afternoon in whatever stack the company already uses. The reference
+implementation is a small Next.js app talking to the Supabase Management API
+with one personal access token, deployed once for every company, gated by a
+shared key.
 
-Register the company. The registry is configuration, never committed: for a
-local console copy `companies.example.json` to `companies.json` (gitignored);
-for a hosted one put the same JSON in the `FLEET_COMPANIES` environment
-variable.
-
-```json
-{ "acme": { "name": "Acme", "projectRef": "<20-char ref>", "schema": "acme_agents", "repo": "owner/acme", "routinesUrl": "https://claude.ai/code/routines" } }
-```
-
-Open `http://localhost:3111/?key=<CONSOLE_KEY>` once; a cookie keeps you in.
-Deploy it anywhere Next.js runs. The owner's deployment is on Vercel, made
-from the `console/` directory with the CLI (the project root is `console/`,
-not the repository root):
-
-```bash
-cd console
-vercel link --yes --project fleet-console --scope <team-slug>
-vercel env add SUPABASE_ACCESS_TOKEN production --sensitive   # paste the sbp_ token
-vercel env add CONSOLE_KEY production
-vercel env add FLEET_COMPANIES production        # the registry JSON, one line
-vercel --prod --yes
-```
-
-It is one deployment for every company: the home page lists them all with
-phase, staffing, running, flags, gate and unroutable counts. Adding a company
-is one entry in the registry and a redeploy.
-
-Per company:
-
-- **Wall** (`/wall.html?c=acme`): the full-screen display — Organism (the
-  fleet as a body: nucleus, division cells, seats on each membrane, pulsing
-  when running), Metrics (tiles, runs by day, staffing by department) and
-  Flow (the gates, the live stream, flagged). Keys 1/2/3 or arrows switch
-  screens, R cycles rotation for a spare monitor. Reads
-  `/api/c/acme/snapshot` every 30 s.
-- **Board** (`/c/acme`): pause / resume, Ask the General Manager, set phase,
-  every seat grouped by division with status and last run, open flags (close
-  from here), the gate, open mandates, activations still waiting for a token,
-  the latest wakes with their HTTP outcome, the event flow.
-- **Seat** (`/c/acme/agents/<slug>`): settings, dispatch (paste the routine id
-  and fire token; waiting wakes are rerouted immediately), recent runs,
-  prompt editor with full version history and one-click restore, the composed
-  `seat_brief()` the seat actually receives, schedules (each row is a pg_cron
-  job).
-- **Rule blocks** (`/c/acme/rules`): the shared rules, per role.
-
-Everything the console does is SQL through the Supabase Management API with
-the one access token; there is no console database.
+Build it before section 6: the seat page is where routine ids and fire tokens
+are pasted, and the board is where the fleet is resumed.
 
 ---
 

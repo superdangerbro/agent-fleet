@@ -1,9 +1,0 @@
-{
-  "acme": {
-    "name": "Acme",
-    "projectRef": "abcdefghijklmnopqrst",
-    "schema": "acme_agents",
-    "repo": "acme/acme-app",
-    "routinesUrl": "https://claude.ai/code/routines"
-  }
-}

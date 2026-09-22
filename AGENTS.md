@@ -47,5 +47,5 @@ BUILD.md                  the procedure — start here
 installer/                the ledger (schema.sql, rules.sql, render.py)
 routines/STUB.md          the routine stub and the by-hand routine steps
 companies/example/        a template company seed
-console/                  the owner's console (Next.js; deploy per BUILD.md §5)
+console/SPEC.md           the owner's console, specified; you build it (BUILD.md §5)
 ```

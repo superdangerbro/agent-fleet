@@ -13,11 +13,13 @@ same installer stands up the next one.
 installer/   the ledger: one parameterised SQL file per company (schema, queue, prompts, schedules)
 routines/    the eight-line stub every Claude Code routine carries, and how to create one
 companies/   example seed for a new company (divisions, seats, first prompts, schedules)
-console/     the owner's console: agents, prompts, rules, schedules, board, pause, ask the GM
+console/     SPEC.md: what the owner's console does; build it in your stack (the missing piece)
 BUILD.md     how to replicate the whole thing for a new business, step by step
 ```
 
-Start with [BUILD.md](BUILD.md).
+Start with [BUILD.md](BUILD.md). This public copy is the structure: the ledger,
+the rules, the routine stub, the procedure. The owner's console is specified in
+`console/SPEC.md` and left for you to build; every screen is one query.
 
 ## Replicating it with your own agent
 
@@ -27,9 +29,9 @@ round of questions:
 > Clone https://github.com/superdangerbro/agent-fleet and follow its BUILD.md to
 > stand up an agent fleet for **<company>**. Divisions: **<list them and what
 > each owns>**. Supabase project: **<ref>** (or create one). Repository:
-> **<owner/name>**. Do everything BUILD.md says end to end; the only step I
-> will do by hand is creating the routines at claude.ai, which you will
-> prepare for me.
+> **<owner/name>**. Do everything BUILD.md says end to end and build the console
+> from console/SPEC.md in <your stack>; the only step I will do by hand is
+> creating the routines at claude.ai, which you will prepare for me.
 
 The root `CLAUDE.md` / `AGENTS.md` tells the agent how to behave here: do the
 whole job, ask for the five inputs once, never commit a secret, and stop only
