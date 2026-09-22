@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+companies/*/secrets*
+console/tsconfig.tsbuildinfo
+console/next-env.d.ts
+console/companies.json
