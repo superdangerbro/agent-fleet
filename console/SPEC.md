@@ -76,10 +76,13 @@ select json_build_object(
   'at', now());
 ```
 
-Three screens work well: the fleet as an organism (nucleus = GM, one cell per
-division, seats on each membrane, pulsing while running, hollow when
-unstaffed), metrics tiles with runs by day, and a three-column flow (the
-gate, the live stream, flagged).
+Built for a TV on the wall, so one landscape screen and no tabs: the fleet
+as a family tree in the middle (General Manager at the top, the Database
+Auditor and each division's manager under it, that division's seats under
+the manager; pulsing while running, hollow when unstaffed, unbuilt divisions
+drawn narrow), the live stream down the right with the gate queue pinned
+above it, and usage along the bottom (the 7-day numbers and runs per day as
+bars).
 
 ## Rules the console must respect
 
