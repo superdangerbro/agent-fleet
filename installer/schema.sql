@@ -469,7 +469,7 @@ begin
          || 'Record your run with trigger ''api''. Do ONLY what this payload asks, report, and stop — no board review, no code, no dispatch beyond it. ' || p_payload;
   v_req := net.http_post(
     url := 'https://api.anthropic.com/v1/claude_code/routines/' || v_disp.routine_id || '/fire',
-    body := jsonb_build_object('payload', v_body),
+    body := jsonb_build_object('text', v_body),
     headers := jsonb_build_object('Authorization', 'Bearer ' || v_disp.fire_token, 'anthropic-version', '2023-06-01',
                                   'anthropic-beta', 'experimental-cc-routine-2026-04-01', 'content-type', 'application/json'),
     timeout_milliseconds := 15000);

@@ -56,7 +56,7 @@ curl -sS -X POST "https://api.anthropic.com/v1/claude_code/routines/<routine_id>
   -H "anthropic-version: 2023-06-01" \
   -H "anthropic-beta: experimental-cc-routine-2026-04-01" \
   -H "content-type: application/json" \
-  --data '{"payload":"<what you want it to do>"}'
+  --data '{"text":"<what you want it to do>"}'
 ```
 
 This is what `wake()` does from inside Postgres. Use it only to carry out a wake
